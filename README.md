@@ -2,9 +2,6 @@
 
 ![Upload Widget Server Banner](https://img.shields.io/badge/📤%20UPLOAD%20WIDGET%20SERVER-Cloudflare%20R2%20Integration-FF6B6B?style=for-the-badge&logo=cloudflare&logoColor=white)
 
-![Static Badge](https://img.shields.io/badge/Status-Em%20Desenvolvimento-success?style=plastic&logo=check-circle&logoColor=white)
-![Static Badge](https://img.shields.io/badge/Version-1.0.0-blue?style=plastic&logo=tag&logoColor=white)
-
 **Servidor de upload de imagens com Cloudflare R2**
 
 [📋 Sobre](#-sobre) • [🚀 Tecnologias](#-tecnologias) • [⚙️ Configuração](#️-configuração) • [📦 Instalação](#-instalação) • [🏃 Executando](#-executando) • [📚 Padrões](#-padrões) • [👤 Autor](#-autor)
@@ -40,7 +37,8 @@ seguindo padrões de arquitetura em camadas e utilizando TypeScript para garanti
 ---
 
 > [!IMPORTANT]
-> Essa aplicação trabalha em conjunto com a aplicação `front-end`</br> > https://github.com/emmanuelmarcosdeoliveira/upload-widget
+> Essa aplicação trabalha em conjunto com a aplicação `front-end`</br> >.
+> [Front-end](https://github.com/emmanuelmarcosdeoliveira/upload-widget)
 
 ---
 
