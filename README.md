@@ -6,11 +6,7 @@
 
 [📋 Sobre](#-sobre) • [🚀 Tecnologias](#-tecnologias) • [⚙️ Configuração](#️-configuração) • [📦 Instalação](#-instalação) • [🏃 Executando](#-executando) • [📚 Padrões](#-padrões) • [👤 Autor](#-autor)
 
----
-
 </div>
-
----
 
 <div align="center">
 
@@ -24,8 +20,6 @@
 
 </div>
 
----
-
 ## 📋 Sobre
 
 Servidor back-end que faz parte de uma aplicação `fullstack`</br>
@@ -37,7 +31,7 @@ seguindo padrões de arquitetura em camadas e utilizando TypeScript para garanti
 ---
 
 > [!IMPORTANT]
-> Essa aplicação trabalha em conjunto com a aplicação `front-end`</br> >.
+> Essa aplicação trabalha em conjunto com a aplicação **front-end**</br> >
 > [Front-end](https://github.com/emmanuelmarcosdeoliveira/upload-widget)
 
 ---
@@ -195,8 +189,6 @@ src/
 - Target: ES2022
 - Module: Node16
 - Lib: ES2023
-
----
 
 ## 👤 Autor
 
