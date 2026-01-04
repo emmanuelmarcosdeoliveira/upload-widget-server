@@ -4,7 +4,7 @@
 
 **Servidor de upload de imagens com Cloudflare R2**
 
-[📋 Sobre](#-sobre) • [🚀 Tecnologias](#-tecnologias) • [⚙️ Configuração](#️-configuração) • [📦 Instalação](#-instalação) • [🏃 Executando](#-executando) • [📚 Padrões](#-padrões) • [👤 Autor](#-autor)
+[📋 Sobre](#-sobre) • [🚀 Tecnologias](#-tecnologias) • [⚙️ Configuração](#️-configuração) • [📦 Instalação](#-instalação) • [🏃 Executando](#-executando) • [📚 Padrões](#-padrões) • [🔄 Fluxo](#-fluxo) • [👤 Autor](#-autor)
 
 </div>
 
@@ -189,6 +189,57 @@ src/
 - Target: ES2022
 - Module: Node16
 - Lib: ES2023
+
+---
+
+## 🔄 Fluxo
+
+Diagrama do fluxo principal de upload de imagens:
+
+```mermaid
+sequenceDiagram
+    participant Cliente
+    participant Fastify as Fastify Server
+    participant Multipart as @fastify/multipart
+    participant Route as uploadImageRoute
+    participant UploadService as UploadImageToStorage
+    participant Storage as R2StorageProvider
+    participant R2 as Cloudflare R2
+
+    Cliente->>Fastify: POST /uploads (multipart/form-data)
+    Fastify->>Multipart: Processa arquivo
+    Multipart->>Route: Arquivo validado (max 4MB)
+
+    alt Arquivo inválido ou ausente
+        Route->>Cliente: 400 Bad Request
+    else Arquivo válido
+        Route->>Storage: Instancia R2StorageProvider
+        Route->>UploadService: Instancia UploadImageToStorage(storage)
+        Route->>UploadService: execute({ name, contentStream, contentType })
+
+        UploadService->>UploadService: Valida request com Zod
+        UploadService->>Storage: uploadFileAsStream({ path, stream, contentType })
+
+        Storage->>Storage: Sanitiza nome do arquivo
+        Storage->>R2: Upload stream via AWS SDK
+        R2-->>Storage: Upload concluído
+        Storage-->>UploadService: { url }
+        UploadService-->>Route: { url }
+        Route->>Cliente: 201 Created { url }
+    end
+```
+
+### Descrição do Fluxo
+
+1. **Cliente** envia requisição POST com arquivo multipart
+2. **Fastify** recebe e processa via plugin multipart
+3. **Route** valida tamanho do arquivo (máximo 4MB)
+4. **UploadImageToStorage** valida dados com Zod
+5. **R2StorageProvider** sanitiza nome e faz upload para Cloudflare R2
+6. **Cloudflare R2** armazena o arquivo
+7. **Cliente** recebe URL pública do arquivo
+
+---
 
 ## 👤 Autor
 
